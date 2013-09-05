@@ -1,9 +1,16 @@
 package com.mapunit;
 
+import java.io.File;
+
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdate;
@@ -14,6 +21,8 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.Circle;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -23,8 +32,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends Activity {
 	
-	static final LatLng HAMBURG = new LatLng(55.558, 9.927);
-	static final LatLng KIEL = new LatLng(53.551, 9.993);
 	static final LatLng CATALYST = new LatLng(45.513, -122.834);
 	static final int STREET_ZOOM = 17;
 	static final float NORTH = 0;
@@ -95,44 +102,64 @@ public class MainActivity extends Activity {
 		.snippet("what is a snippit?") // snippit appears to be text under title
 		.icon(iconToUse)
 		//ic_coins_l
+		
 		;
 		
+		Marker markMark = map.addMarker(firstMarker);// returns marker that was added to the map
 		
-		// customize info window
-		map.setInfoWindowAdapter(new InfoWindowAdapter(){
-
-			@Override
-			public View getInfoContents(Marker marker) {
-				double lat = marker.getPosition().latitude;
-				double lon = marker.getPosition().longitude;
-				marker.setSnippet("Latitude is " + lat + "  Longitude is" + lon);// doesn't recognize \n as a newline
-				
-				// can return custom view - don't need newline
-				View view = getLayoutInflater().inflate(R.layout.info_window,null);
-				TextView latitude = ((TextView)view.findViewById(R.id.window_lat));// reference off of main view
-				latitude.setText("Latitude is " + lat);
-				
-				TextView longitude = ((TextView)view.findViewById(R.id.window_lon));
-				longitude.setText("Longitude is " + lon);
-				
-				// if you return null, it uses the default view, but
-				// you can still modify the marker
-				return view;
-			}
-
-			@Override
-			public View getInfoWindow(Marker marker) {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			
-			
-			
-		});
+		// customize info window	//remember, only one info window can be shown at a time, either reuse or recreate
+		// custom info window is based on marker, that is the key!
+		// how do we know which dataset is associated with the marker???
+		// set marker snippet to record id??  that might work
 		
 		
-		map.addMarker(firstMarker);
+		
+		customizeInfoWindowAdapter();// customized marker listener
+		
+		
+		// add more fake markers
+		FakeMarkerOptionsGenerator fakker = new FakeMarkerOptionsGenerator();
+		
+		// need to maintain a list of markers if I want to do anything with them - like put concentric ring around them
+		for(MarkerOptions marker : fakker.getMarkerList()){
+			Marker placedMarker = map.addMarker(marker);
+			
+			// add concentric circles
+			
+			
+			Circle circle = map.addCircle(new CircleOptions()
+				.center(placedMarker.getPosition())
+				.radius(100)// in meters
+				.strokeColor(Color.RED)
+			);
+			
+			//Location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results);
+			
+			
+		}
+		
+		
+		// find center of mass
+		PointCalculations pc = new PointCalculations();
+		LatLng centerOfMass = pc.figureCenterOfMass(fakker.getMarkerList());
+		
+		
+		// marker stuff here
+				//iconToUse = BitmapDescriptorFactory.fromResource(android.R.drawable.);
+				
+				firstMarker = new MarkerOptions()
+				.position(centerOfMass)	//	position of marker
+				.visible(true) // is visible
+				.draggable(true) // is draggable
+				.title("Where are you?") // marker title
+				.snippet("what is a snippit?") // snippit appears to be text under title
+				//.icon(iconToUse)
+				//ic_coins_l
+				
+				;
+				
+				map.addMarker(firstMarker);// returns marker that was added to the map
+				
 		
 		
 		
@@ -147,4 +174,56 @@ public class MainActivity extends Activity {
 		return true;
 	}
 
+	
+	private void customizeInfoWindowAdapter() {
+
+		// there is only one info window per map
+		// need to modify for each marker
+		// listens for marker
+		
+		map.setInfoWindowAdapter(new InfoWindowAdapter() {
+
+			@Override
+			public View getInfoContents(Marker marker) {
+				double lat = marker.getPosition().latitude;
+				double lon = marker.getPosition().longitude;
+				
+				// can return custom view
+				View view = getLayoutInflater().inflate(R.layout.info_window,
+						null);
+				TextView latitude = ((TextView) view
+						.findViewById(R.id.window_lat));// reference off of main
+														// view
+				//latitude.setText(marker.getTitle() + "  " + "Latitude is " + lat);
+
+				TextView longitude = ((TextView) view
+						.findViewById(R.id.window_lon));
+				//longitude.setText("Longitude is " + lon);
+				
+				
+				ImageView imageView = ((ImageView)view.findViewById(R.id.first_bird));
+				
+				
+				
+				File imgFile = new  File("/storage/sdcard0/Pictures/BirdAppPictures/"+marker.getTitle()+".jpg");
+				if (imgFile.exists()){
+
+				Bitmap bitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+				imageView.setImageBitmap(bitmap);
+				}
+				// if you return null, it uses the default view, but
+				// you can still modify the marker
+				return view;
+			}
+
+			@Override
+			public View getInfoWindow(Marker marker) {
+				
+				return null;
+			}
+
+		});
+
+	}
 }
