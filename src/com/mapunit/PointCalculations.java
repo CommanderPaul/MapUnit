@@ -8,25 +8,21 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-
-
 public class PointCalculations {
+	
 	/**
 	 * center of mass of inputed points in the form of a list of markers
 	 * returns a LatLng
 	 * will probably fail at prime meridian and equator
 	 */
 	public LatLng figureCenterOfMass(List<MarkerOptions> listOfMarkers){
-		
-		// set up running totals
-		double runningLat = 0;
-		double runningLon = 0;
+
+		double runningLat = 0d;
+		double runningLon = 0d;
 		
 		for (MarkerOptions marker : listOfMarkers){
-			
 			runningLat += marker.getPosition().latitude;
 			runningLon += marker.getPosition().longitude;
-			
 		}
 		
 		double finalLat = runningLat/listOfMarkers.size();
@@ -53,9 +49,7 @@ public class PointCalculations {
 	}
 	
 	public void calculateArea(){
-		
-		
-		
+		//TODO calculating the area poses additional challenges
 	}
 	
 }

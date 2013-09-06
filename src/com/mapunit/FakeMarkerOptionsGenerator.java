@@ -7,7 +7,6 @@ import java.util.Random;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.util.Log;
 
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -62,8 +61,7 @@ public class FakeMarkerOptionsGenerator {
 				// couldn't find the image, use default
 				iconToUse = BitmapDescriptorFactory.fromResource(android.R.drawable.btn_star_big_on);
 			}
-			
-						
+				
 					if (x % 4 == 1){
 						title = "crow";
 					}else if (x % 4 == 2){
@@ -73,7 +71,6 @@ public class FakeMarkerOptionsGenerator {
 					}else{
 						title = "robin";
 					}
-					
 					
 			
 					markerOptions = new MarkerOptions().position(generatePoints())
@@ -89,27 +86,26 @@ public class FakeMarkerOptionsGenerator {
 
 		}
 	}
-	
-	
-	
-	
-	// random points about Catalyst
+
+	/**
+	 * generate random point near Catalyst
+	 * @return
+	 */
 	private LatLng generatePoints(){
 		LatLng returnPoint = null;
 		//new LatLng(45.513, -122.834);
-		double baseLat = 45.513f;
-		double baseLon = -122.834f;
+		Double baseLat = 45.513d;
+		double baseLon = -122.834d;
 		
 		Random random = new Random();
-		double newLat = ((random.nextFloat() - .5) * .001) + baseLat;
+		Double newLat = ((random.nextFloat() - .5) * .001) + baseLat;
 		double newLon = ((random.nextFloat() - .5) * .001) + baseLon;
 		
 		returnPoint = new LatLng(newLat, newLon);
-		
+
 		return returnPoint;
 	}
 
-	
 	// Getters and Setters
 	
 	public List<MarkerOptions> getMarkerList() {
@@ -119,6 +115,5 @@ public class FakeMarkerOptionsGenerator {
 	public void setMarkerList(List<MarkerOptions> markerList) {
 		this.markerList = markerList;
 	}
-	
 	
 }
