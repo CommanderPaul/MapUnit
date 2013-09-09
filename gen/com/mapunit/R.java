@@ -153,6 +153,7 @@ containing a value of this type.
          */
         public static final int activity_horizontal_margin=0x7f070000;
         public static final int activity_vertical_margin=0x7f070001;
+        public static final int map_preferences_text_size=0x7f070002;
     }
     public static final class drawable {
         public static final int common_signin_btn_icon_dark=0x7f020000;
@@ -183,29 +184,41 @@ containing a value of this type.
         public static final int mike=0x7f020019;
     }
     public static final class id {
-        public static final int action_settings=0x7f05000d;
-        public static final int center_of_mass=0x7f05000a;
-        public static final int first_bird=0x7f050008;
-        public static final int functions=0x7f050009;
+        public static final int action_settings=0x7f050016;
+        public static final int button1=0x7f05000d;
+        public static final int button2=0x7f05000e;
+        public static final int center_of_mass=0x7f050013;
+        public static final int first_bird=0x7f050011;
+        public static final int functions=0x7f050012;
         public static final int hybrid=0x7f050004;
         public static final int map=0x7f050005;
-        public static final int map_type=0x7f05000f;
-        public static final int my_location=0x7f05000e;
+        public static final int map_tilt=0x7f050007;
+        public static final int map_type=0x7f050018;
+        public static final int map_zoom=0x7f05000a;
+        public static final int more=0x7f050019;
+        public static final int my_location=0x7f050017;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
-        public static final int show_circles=0x7f05000b;
+        public static final int show_circles=0x7f050014;
         public static final int terrain=0x7f050003;
-        public static final int under_development=0x7f05000c;
-        public static final int window_lat=0x7f050006;
-        public static final int window_lon=0x7f050007;
+        public static final int tilt_setting=0x7f050009;
+        public static final int tilt_setting_text=0x7f050008;
+        public static final int title=0x7f050006;
+        public static final int under_development=0x7f050015;
+        public static final int window_lat=0x7f05000f;
+        public static final int window_lon=0x7f050010;
+        public static final int zoom_setting=0x7f05000c;
+        public static final int zoom_setting_text=0x7f05000b;
     }
     public static final class layout {
         public static final int activity_main=0x7f030000;
-        public static final int info_window=0x7f030001;
+        public static final int activity_map_settings=0x7f030001;
+        public static final int info_window=0x7f030002;
     }
     public static final class menu {
         public static final int main=0x7f090000;
+        public static final int map_settings=0x7f090001;
     }
     public static final class string {
         public static final int action_settings=0x7f060016;
@@ -294,6 +307,9 @@ containing a value of this type.
         public static final int functions=0x7f060019;
         public static final int hello_world=0x7f060017;
         public static final int hybrid=0x7f06001b;
+        /**  Map Settings Layout 
+         */
+        public static final int map_settings_title=0x7f060022;
         public static final int map_type=0x7f06001a;
         /**  Settings Sub Menu 
          */
@@ -302,6 +318,11 @@ containing a value of this type.
         public static final int satellite=0x7f06001e;
         public static final int show_circles=0x7f06001f;
         public static final int terrain=0x7f06001d;
+        public static final int tilt_default=0x7f060024;
+        public static final int tilt_setting=0x7f060023;
+        public static final int title_activity_map_settings=0x7f060021;
+        public static final int zoom_default=0x7f060026;
+        public static final int zoom_setting=0x7f060025;
     }
     public static final class style {
         /** 

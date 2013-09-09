@@ -8,7 +8,8 @@
         android:showAsAction="ifRoom"
         android:title="@string/functions">
         <menu>
-            <!-- Functions Menu -->
+
+            <!-- Functions Menu -->
             <item
                 android:id="@+id/center_of_mass"
                 android:orderInCategory="50"
@@ -69,6 +70,11 @@
                         android:title="@string/satellite"/>
                 </menu>
             </item>
+            <item
+                android:id="@+id/more"
+                android:orderInCategory="50"
+                android:showAsAction="ifRoom"
+                android:title="More Maps Settings"/>
         </menu>
     </item>
 

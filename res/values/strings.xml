@@ -14,7 +14,17 @@
     <string name="terrain">Terrain</string>
     <string name="satellite">Satellite</string>
     <string name="show_circles">Show Circles</string>
-    
+
     <!-- Settings Sub Menu -->
     <string name="my_location">My Location Button</string>
+    <string name="title_activity_map_settings">MapSettingsActivity</string>
+
+    
+    <!-- Map Settings Layout -->
+    <string name="map_settings_title">Map Settings</string>
+    <string name="tilt_setting">Tilt Setting</string>
+    <string name="tilt_default">Tilt Default</string>
+    <string name="zoom_setting">Zoom Setting</string>
+    <string name="zoom_default">Zoom Default</string>
+    
 </resources>

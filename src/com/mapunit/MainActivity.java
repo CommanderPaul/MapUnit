@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -30,8 +31,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MainActivity extends Activity {
 	
 	static final LatLng CATALYST = new LatLng(45.513, -122.834);
-	static final int STREET_ZOOM = 17;
-	static final float NORTH = 0;
 	
 	private FakeMarkerOptionsGenerator fakker;
 	private List<Circle> circles = new ArrayList<Circle>();
@@ -56,7 +55,7 @@ public class MainActivity extends Activity {
 		
 		this.fakker = new FakeMarkerOptionsGenerator();	//generates fake marker options
 
-		map.animateCamera(new MapSettings().configureMapView());// configures map view
+		map.animateCamera(new MapSettings(this).configureMapView());// configures map view
 		
 		// customize info window	//remember, only one info window can be shown at a time, either reuse or recreate
 		// custom info window is based on marker, that is the key!
@@ -168,10 +167,16 @@ public class MainActivity extends Activity {
 		// Under Development ----------------------------------------
 		if (item.getTitle().toString().equalsIgnoreCase("under_development")){
 			
-			
 			showClosestPoint();
 			
 		}
+		// More Map Settings ---------------------------------------
+		if (item.getTitle().toString().equalsIgnoreCase("More Maps Settings")){
+			
+			Intent intent = new Intent(this, MapSettingsActivity.class);
+			startActivity(intent);
+		}
+		
 		
 		// Add Features ---------------------------------------------
 		if (item.getTitle().toString().equalsIgnoreCase("Center of Mass")){

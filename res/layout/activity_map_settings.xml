@@ -1,0 +1,100 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MapSettingsActivity" >
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/map_settings_title" />
+
+    <LinearLayout
+        android:id="@+id/map_tilt"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/tilt_setting_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/tilt_setting" 
+            android:textSize="@dimen/map_preferences_text_size"
+            android:gravity="center"
+            />
+
+        <NumberPicker
+            android:id="@+id/tilt_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:showDividers="beginning|middle|end" />
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="@string/tilt_default" 
+            android:onClick="resetTilt"
+            />
+        
+    </LinearLayout>
+	<LinearLayout
+        android:id="@+id/map_zoom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/zoom_setting_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@string/zoom_setting" 
+            android:textSize="@dimen/map_preferences_text_size"
+            android:gravity="center"
+            />
+
+        <NumberPicker
+            android:id="@+id/zoom_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:gravity="center_vertical|center_horizontal"
+            android:showDividers="beginning|middle|end" />
+        
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:text="@string/zoom_default" 
+            android:onClick="resetZoom"
+            />
+        
+    </LinearLayout>
+    
+    
+    
+
+
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/button2"
+            android:layout_below="@+id/button2"
+            android:onClick="saveChanges"
+            android:text="Save Changes" />
+    
+</LinearLayout>
