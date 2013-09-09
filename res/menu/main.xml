@@ -8,7 +8,7 @@
         android:showAsAction="ifRoom"
         android:title="@string/functions">
         <menu>
- <!-- Functions Menu -->
+            <!-- Functions Menu -->
             <item
                 android:id="@+id/center_of_mass"
                 android:orderInCategory="50"
@@ -20,12 +20,33 @@
                 android:showAsAction="ifRoom"
                 android:title="@string/show_circles"/>
             <item
+                android:id="@+id/under_development"
+                android:orderInCategory="50"
+                android:showAsAction="ifRoom"
+                android:title="under_development"/>
+        </menu>
+    </item>
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:showAsAction="never"
+        android:title="@string/action_settings">
+
+        <!-- Settings Menu -->
+        <menu>
+            <item
+                android:id="@+id/my_location"
+                android:orderInCategory="50"
+                android:showAsAction="ifRoom"
+                android:title="@string/my_location"/>
+            <item
                 android:id="@+id/map_type"
                 android:orderInCategory="50"
                 android:showAsAction="ifRoom"
                 android:title="@string/map_type">
                 <menu>
- <!-- Map Types Sub Menu -->
+
+                    <!-- Map Types Sub Menu -->
                     <item
                         android:id="@+id/hybrid"
                         android:orderInCategory="50"
@@ -46,32 +67,9 @@
                         android:orderInCategory="50"
                         android:showAsAction="ifRoom"
                         android:title="@string/satellite"/>
-                    
                 </menu>
-                
-                
-                
             </item>
         </menu>
     </item>
-    <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="always"
-        android:title="@string/action_settings">
-    <!-- Settings Menu -->
-    	<menu>
-    	    
-    	    <item
-                android:id="@+id/my_location"
-                android:orderInCategory="50"
-                android:showAsAction="ifRoom"
-                android:title="@string/my_location"/>
-    	    
-    	    
-    	    
-    	    
-    	    
-    	</menu>
-	</item>
+
 </menu>

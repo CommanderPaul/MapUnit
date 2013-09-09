@@ -189,13 +189,14 @@ containing a value of this type.
         public static final int functions=0x7f050009;
         public static final int hybrid=0x7f050004;
         public static final int map=0x7f050005;
-        public static final int map_type=0x7f05000c;
+        public static final int map_type=0x7f05000f;
         public static final int my_location=0x7f05000e;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int satellite=0x7f050002;
         public static final int show_circles=0x7f05000b;
         public static final int terrain=0x7f050003;
+        public static final int under_development=0x7f05000c;
         public static final int window_lat=0x7f050006;
         public static final int window_lon=0x7f050007;
     }

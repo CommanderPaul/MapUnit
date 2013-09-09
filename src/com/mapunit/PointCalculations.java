@@ -3,6 +3,7 @@ package com.mapunit;
 import java.util.List;
 
 import android.location.Location;
+import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -33,19 +34,47 @@ public class PointCalculations {
 		return finalPosition;
 	}
 	
-	//TODO not finished
-	public void figureDistanceInMeters(List<Marker> listOfMarkers){
+	public Marker findClosestToCenter(LatLng centerPoint, List<Marker> listOfMarkers){
+		float closestDistance = -1;
+		Marker closestMarker = null;
+		for (Marker marker : listOfMarkers){
+			Log.d("xxxxx"," " + figureDistanceInMeters(centerPoint, marker));
+			
+			
+			if (closestMarker == null){// first marker
+				closestMarker = marker;
+				
+			}else if (figureDistanceInMeters(centerPoint, marker) < closestDistance){
+				closestMarker = marker;
+				closestDistance = figureDistanceInMeters(centerPoint, marker);
+			}
+			
+			
+		}
 		
-		int x = listOfMarkers.size();
+		return closestMarker;
+	}
+	
+	
+
+	public float figureDistanceInMeters(LatLng centerMarker, Marker unknownMarker){
 		
-		// results is a float array that holds the results of the calculation
 		//Location.distanceBetween(startLatitude, startLongitude, endLatitude, endLongitude, results);
-		Location locationA = new Location("A");
-		locationA.setLatitude(listOfMarkers.get(0).getPosition().latitude);
-		locationA.setLongitude(listOfMarkers.get(0).getPosition().longitude);
+
+		// set center location
+		Location centerLocation = new Location("Center");
+		centerLocation.setLatitude(centerMarker.latitude);
+		centerLocation.setLongitude(centerMarker.longitude);
 		
-		//locationA.distanceTo(locationB);
+		// set unknown marker
+		Location unknownLocation = new Location("Unknown");
+		unknownLocation.setLatitude(unknownMarker.getPosition().latitude);
+		unknownLocation.setLongitude(unknownMarker.getPosition().longitude);
 		
+		// figure distance
+		float distance = centerLocation.distanceTo(unknownLocation);// in meters
+		
+		return distance;
 	}
 	
 	public void calculateArea(){

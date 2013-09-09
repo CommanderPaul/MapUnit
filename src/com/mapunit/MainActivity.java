@@ -32,12 +32,11 @@ public class MainActivity extends Activity {
 	static final LatLng CATALYST = new LatLng(45.513, -122.834);
 	static final int STREET_ZOOM = 17;
 	static final float NORTH = 0;
-	private static final float LOW_TILT = 40F;
-	private static final float TOP_TILT = 0F;
 	
 	private FakeMarkerOptionsGenerator fakker;
 	private List<Circle> circles = new ArrayList<Circle>();
 	private Marker centerOfMassMarker;
+	private List<Marker> placedMarkers = new ArrayList<Marker>();
 	
 	// GoogleMap is the main class of the Google Maps Android API and is the entry point
 	// for all methods related to the map. You cannot instantiate a GoogleMap object 
@@ -68,7 +67,9 @@ public class MainActivity extends Activity {
 		
 		
 		for (MarkerOptions marker : fakker.getMarkerList()) {
-			Marker placedMarker = map.addMarker(marker);}
+			Marker placedMarker = map.addMarker(marker);
+			placedMarkers.add(placedMarker);
+		}
 
 		
 		
@@ -102,6 +103,17 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	
+	public void showClosestPoint(){
+		
+		PointCalculations pc = new PointCalculations();
+		
+		// need to make sure I have center of mass
+		LatLng centerPoint = pc.figureCenterOfMass(fakker.getMarkerList());
+		pc.findClosestToCenter(centerPoint, placedMarkers);
+		
+	}
+	
 	/**
 	 * 
 	 * 
@@ -115,7 +127,7 @@ public class MainActivity extends Activity {
 			centerOfMassMarker.remove();
 			centerOfMassMarker = null;
 		} else {
-			PointCalculations pc = new PointCalculations();
+			PointCalculations pc = new PointCalculations();//TODO push this up
 			LatLng centerOfMass = pc.figureCenterOfMass(fakker.getMarkerList());
 
 			// TODO find/make a good marker for center of mass
@@ -153,6 +165,13 @@ public class MainActivity extends Activity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 
+		// Under Development ----------------------------------------
+		if (item.getTitle().toString().equalsIgnoreCase("under_development")){
+			
+			
+			showClosestPoint();
+			
+		}
 		
 		// Add Features ---------------------------------------------
 		if (item.getTitle().toString().equalsIgnoreCase("Center of Mass")){
