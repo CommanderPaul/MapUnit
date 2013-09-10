@@ -1,24 +1,26 @@
 package com.mapunit;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.NumberPicker;
-import android.widget.Toast;
+import android.widget.Spinner;
 
-public class MapSettingsActivity extends Activity {
-
-	private static String MAP_PREFERENCES = "Map Preferences";
-	private static String TILT_KEY = "tilt";
-	private static String ZOOM_KEY = "zoom";
-	
+public class MapSettingsActivity extends Activity implements Constants {
 	
 	private SharedPreferences preferences;
 	private NumberPicker tiltNumberPicker;
 	private NumberPicker zoomNumberPicker;
+	private Spinner mapTypeSpinner;
+	private List<String> mapTypes;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,35 @@ public class MapSettingsActivity extends Activity {
 		zoomNumberPicker.setMaxValue(20);
 		zoomNumberPicker.setMinValue(0);
 		zoomNumberPicker.setValue((int) preferences.getFloat(ZOOM_KEY, 0f));
+		// map type spinner configuration
+		mapTypeSpinner = (Spinner)findViewById(R.id.map_type_spinner);
 		
+		mapTypes = new ArrayList<String>();//TODO should this be an enum?
+		mapTypes.add("Hybrid");
+		mapTypes.add("Normal");
+		mapTypes.add("Terrain");
+		mapTypes.add("Satellite");
+		
+		ArrayAdapter<String> mapTypeDataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, mapTypes);
+		mapTypeDataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		mapTypeSpinner.setAdapter(mapTypeDataAdapter);
+		
+		mapTypeSpinner.setSelection(figureListIDFromSharedPreferences());
+		
+		
+	}
+	
+	private int figureListIDFromSharedPreferences(){
+		String currentSetting = preferences.getString(MAP_TYPE_KEY, DEFAULT_MAP_TYPE);
+		int returnIndex = 0;// default is first item
+		
+		for (int x = 0; x < mapTypes.size(); x++){
+			if (mapTypes.get(x).equalsIgnoreCase(currentSetting)){
+				returnIndex =x;
+			}
+		}
+		
+		return returnIndex;
 	}
 	
 	@Override
@@ -51,9 +81,18 @@ public class MapSettingsActivity extends Activity {
 	public void saveChanges(View view){
 		setMapTilt();
 		setMapZoom();
+		setMapType();
 		
+		// close activity
+		finish();
 	}
 	
+	
+	public boolean setMapType(){
+		String selection = (String) mapTypeSpinner.getSelectedItem();  // returns string from list
+		boolean result = writeStringToSharedPreferences(MAP_TYPE_KEY, selection);
+		return result;
+	}
 	
 	/**
 	 * Set Map Tilt
@@ -93,6 +132,13 @@ public class MapSettingsActivity extends Activity {
 		boolean result = preferences.edit().putFloat(key, value).commit();
 		return result;
 	}
+	
+	private boolean writeStringToSharedPreferences(String key, String value){
+		boolean result = preferences.edit().putString(key, value).commit();
+		return result;
+	}
+	
+	
 	
 	// should get map preferences elsewhere
 	public float getTiltFromSharedPreferences(View view){

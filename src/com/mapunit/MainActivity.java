@@ -30,12 +30,12 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends Activity {
 	
-	static final LatLng CATALYST = new LatLng(45.513, -122.834);
-	
 	private FakeMarkerOptionsGenerator fakker;
 	private List<Circle> circles = new ArrayList<Circle>();
 	private Marker centerOfMassMarker;
 	private List<Marker> placedMarkers = new ArrayList<Marker>();
+	private MapSettings mapSettings;
+	private PointCalculations pointCalculations;
 	
 	// GoogleMap is the main class of the Google Maps Android API and is the entry point
 	// for all methods related to the map. You cannot instantiate a GoogleMap object 
@@ -57,6 +57,12 @@ public class MainActivity extends Activity {
 
 		map.animateCamera(new MapSettings(this).configureMapView());// configures map view
 		
+		// set map type from shared preferences
+		mapSettings = new MapSettings(this);
+		map.setMapType(mapSettings.getMapTypeFromSharedPreferences());
+		
+		pointCalculations = new PointCalculations();
+		
 		// customize info window	//remember, only one info window can be shown at a time, either reuse or recreate
 		// custom info window is based on marker, that is the key!
 		// how do we know which dataset is associated with the marker???
@@ -75,6 +81,16 @@ public class MainActivity extends Activity {
 		// Location.distanceBetween(startLatitude, startLongitude,
 		// endLatitude, endLongitude, results);
 		
+	}
+	
+	/**
+	 * Refresh Map after making changes to settings
+	 */
+	@Override
+	public void onRestart(){
+		super.onRestart();
+		map.animateCamera(mapSettings.configureMapView());
+		map.setMapType(mapSettings.getMapTypeFromSharedPreferences());
 	}
 	
 	/**
@@ -102,6 +118,10 @@ public class MainActivity extends Activity {
 		}
 	}
 
+	public void resetView(View view){
+		mapSettings.resetZoom(map);
+		//mapSettings.centerOnCatalyst(map);
+	}
 	
 	public void showClosestPoint(){
 		
@@ -126,8 +146,8 @@ public class MainActivity extends Activity {
 			centerOfMassMarker.remove();
 			centerOfMassMarker = null;
 		} else {
-			PointCalculations pc = new PointCalculations();//TODO push this up
-			LatLng centerOfMass = pc.figureCenterOfMass(fakker.getMarkerList());
+			
+			LatLng centerOfMass = pointCalculations.figureCenterOfMass(fakker.getMarkerList());
 
 			// TODO find/make a good marker for center of mass
 			// iconToUse =
@@ -159,51 +179,32 @@ public class MainActivity extends Activity {
 	 * can switch on a string in java 7 BUT ADT only supports 5 or 6!!!
 	 * Currently reacting to string title of name, which is bad for localization
 	 * appears that the other option is by item number, which is determined
-	 * by order.  Menu not settled yet, so, TODO convert menu to use item number
+	 * by order.
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item){
 
-		// Under Development ----------------------------------------
+		// Under Development ----------------------------------------//TODO remove when no longer neaded
 		if (item.getTitle().toString().equalsIgnoreCase("under_development")){
-			
 			showClosestPoint();
-			
 		}
-		// More Map Settings ---------------------------------------
-		if (item.getTitle().toString().equalsIgnoreCase("More Maps Settings")){
-			
+		
+		// Map Settings ---------------------------------------
+		if (item.getTitle().toString().equalsIgnoreCase( getString(R.string.map_settings))){
 			Intent intent = new Intent(this, MapSettingsActivity.class);
 			startActivity(intent);
 		}
-		
-		
+
 		// Add Features ---------------------------------------------
-		if (item.getTitle().toString().equalsIgnoreCase("Center of Mass")){
+		if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.center_of_mass))){
 			showCenterOfMass();
 		}
-		if (item.getTitle().toString().equalsIgnoreCase("Show Circles")){
+		if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.show_circles))){
 			circlesForPoints();
 		}
-		
-		
-		// Map type-------------------------------------------------
-		if (item.getTitle().toString().equalsIgnoreCase("Hybrid")){
-			map.setMapType(GoogleMap.MAP_TYPE_HYBRID);
-		}
-		
-		if (item.getTitle().toString().equalsIgnoreCase("Normal")){
-			map.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-		}
-		if (item.getTitle().toString().equalsIgnoreCase("Terrain")){
-			map.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
-		}
-		if (item.getTitle().toString().equalsIgnoreCase("Satellite")){
-			map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-		}
-		
+
 		// Show location button --------------------------------------
-		if (item.getTitle().toString().equalsIgnoreCase("My Location Button")) {
+		if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.my_location))) {
 
 			if (map.isMyLocationEnabled()) {
 				map.setMyLocationEnabled(false);
@@ -215,20 +216,16 @@ public class MainActivity extends Activity {
 				item.setChecked(true);
 			}
 		}
-		
-		
-		
+
 		return true;
 	}
-	
-	
 	
 	private void customizeInfoWindowAdapter() {
 
 		// there is only one info window per map
 		// need to modify for each marker
-		// listens for marker
-		
+		// listens for marker click
+		//TODO need to make this method more meaningful
 		map.setInfoWindowAdapter(new InfoWindowAdapter() {
 
 			@Override

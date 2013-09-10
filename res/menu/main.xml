@@ -41,40 +41,10 @@
                 android:showAsAction="ifRoom"
                 android:title="@string/my_location"/>
             <item
-                android:id="@+id/map_type"
-                android:orderInCategory="50"
-                android:showAsAction="ifRoom"
-                android:title="@string/map_type">
-                <menu>
-
-                    <!-- Map Types Sub Menu -->
-                    <item
-                        android:id="@+id/hybrid"
-                        android:orderInCategory="50"
-                        android:showAsAction="ifRoom"
-                        android:title="@string/hybrid"/>
-                    <item
-                        android:id="@+id/normal"
-                        android:orderInCategory="50"
-                        android:showAsAction="ifRoom"
-                        android:title="@string/normal"/>
-                    <item
-                        android:id="@+id/terrain"
-                        android:orderInCategory="50"
-                        android:showAsAction="ifRoom"
-                        android:title="@string/terrain"/>
-                    <item
-                        android:id="@+id/satellite"
-                        android:orderInCategory="50"
-                        android:showAsAction="ifRoom"
-                        android:title="@string/satellite"/>
-                </menu>
-            </item>
-            <item
                 android:id="@+id/more"
                 android:orderInCategory="50"
                 android:showAsAction="ifRoom"
-                android:title="More Maps Settings"/>
+                android:title="@string/map_settings"/>
         </menu>
     </item>
 

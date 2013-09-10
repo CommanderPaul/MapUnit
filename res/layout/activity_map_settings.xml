@@ -25,10 +25,9 @@
             android:id="@+id/tilt_setting_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/tilt_setting" 
-            android:textSize="@dimen/map_preferences_text_size"
             android:gravity="center"
-            />
+            android:text="@string/tilt_setting"
+            android:textSize="@dimen/map_preferences_text_size" />
 
         <NumberPicker
             android:id="@+id/tilt_setting"
@@ -37,19 +36,18 @@
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical|center_horizontal"
             android:showDividers="beginning|middle|end" />
-        
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="@string/tilt_default" 
             android:onClick="resetTilt"
-            />
-        
+            android:text="@string/tilt_default" />
     </LinearLayout>
-	<LinearLayout
+
+    <LinearLayout
         android:id="@+id/map_zoom"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -59,10 +57,9 @@
             android:id="@+id/zoom_setting_text"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="@string/zoom_setting" 
-            android:textSize="@dimen/map_preferences_text_size"
             android:gravity="center"
-            />
+            android:text="@string/zoom_setting"
+            android:textSize="@dimen/map_preferences_text_size" />
 
         <NumberPicker
             android:id="@+id/zoom_setting"
@@ -71,30 +68,45 @@
             android:layout_marginLeft="10dp"
             android:gravity="center_vertical|center_horizontal"
             android:showDividers="beginning|middle|end" />
-        
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:gravity="center"
-            android:text="@string/zoom_default" 
             android:onClick="resetZoom"
-            />
-        
+            android:text="@string/zoom_default" />
     </LinearLayout>
-    
-    
-    
-
-
-        <Button
-            android:id="@+id/button1"
+	
+     <LinearLayout
+        android:id="@+id/map_type"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+        
+         <TextView
+            android:id="@+id/map_type_setting_text"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/button2"
-            android:layout_below="@+id/button2"
-            android:onClick="saveChanges"
-            android:text="Save Changes" />
-    
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/map_type"
+            android:textSize="@dimen/map_preferences_text_size" />
+
+         <Spinner
+             android:id="@+id/map_type_spinner"
+             android:layout_width="0dp"
+             android:layout_height="wrap_content"
+             android:layout_weight="1" />
+         
+        
+         
+    </LinearLayout>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveChanges"
+        android:text="@string/save_changes" />
+
 </LinearLayout>

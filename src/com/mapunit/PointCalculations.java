@@ -16,7 +16,7 @@ public class PointCalculations {
 	 * returns a LatLng
 	 * will probably fail at prime meridian and equator
 	 */
-	public LatLng figureCenterOfMass(List<MarkerOptions> listOfMarkers){
+	public LatLng figureCenterOfMass(List<MarkerOptions> listOfMarkers){//TODO this should us markers and not marker options
 
 		double runningLat = 0d;
 		double runningLon = 0d;

@@ -18,6 +18,7 @@
     <!-- Settings Sub Menu -->
     <string name="my_location">My Location Button</string>
     <string name="title_activity_map_settings">MapSettingsActivity</string>
+    <string name="map_settings">Map Settings</string>
 
     
     <!-- Map Settings Layout -->
@@ -26,5 +27,8 @@
     <string name="tilt_default">Tilt Default</string>
     <string name="zoom_setting">Zoom Setting</string>
     <string name="zoom_default">Zoom Default</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="map_type">Map Type</string>
+    <string name="type_default">Map Type Default</string>
     
 </resources>
