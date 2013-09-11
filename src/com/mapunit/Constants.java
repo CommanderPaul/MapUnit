@@ -21,5 +21,6 @@ public interface Constants {
 	String DEFAULT_MAP_TYPE = "Normal";
 	
 	float NORTH = 0;
+	float STANDARD_ZOOM = 15f;
 	
 }

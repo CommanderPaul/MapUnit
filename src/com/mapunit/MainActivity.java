@@ -119,7 +119,7 @@ public class MainActivity extends Activity {
 	}
 
 	public void resetView(View view){
-		mapSettings.resetZoom(map);
+		mapSettings.resetView(map);
 		//mapSettings.centerOnCatalyst(map);
 	}
 	

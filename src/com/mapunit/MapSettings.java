@@ -8,6 +8,7 @@ import android.util.Log;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.CancelableCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 
 
@@ -64,26 +65,26 @@ public class MapSettings implements Constants {
 		return wholeThing;
 	}
 	
-	public boolean centerOnCatalyst(GoogleMap map){
-//		CameraUpdate newCenter = CameraUpdateFactory.newLatLng(CATALYST);
-//		map.moveCamera(newCenter);
-		
-		
-CameraUpdate newZoom = CameraUpdateFactory.zoomTo(10.0f);//TODO why does this work here and not in resetZoom?????
-		//TODO might need a callback before running second update.
-		map.animateCamera(newZoom);
-		
+	public boolean resetView(final GoogleMap map){
+		// can't seem to execute two animateCamera's consecutively, need to use callback
+
+		CameraUpdate newZoom = CameraUpdateFactory.zoomTo(STANDARD_ZOOM);// set zoom
+		map.animateCamera(newZoom, 
+
+				new CancelableCallback(){
+					@Override
+					public void onCancel() {
+						// do nothing
+					}
+
+					@Override
+					public void onFinish() {
+						CameraUpdate newCenter = CameraUpdateFactory.newLatLng(CATALYST);
+						map.moveCamera(newCenter);
+					}}
+				);
 		return true;
 	}
 	
-	public boolean resetZoom(GoogleMap map){
-		
-		Log.w("xxx" , "xxx zoom running? ");
-		
-		CameraUpdate newZoom = CameraUpdateFactory.zoomTo(10.0f);
-		
-		map.animateCamera(newZoom);
-		return true;
-	}
-	
+
 }
