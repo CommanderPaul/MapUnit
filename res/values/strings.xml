@@ -49,9 +49,10 @@
     <string name="placeholder">placeholder</string>
 
     <!-- Bird Entry Menu -->
-    <string name="show_map">Show Map</string>
+    <string name="show_map">Map</string>
     <string name="show_camera">Camera</string>
     <string name="title_activity_camera">CameraActivity</string>
     <string name="title_activity_record_review">RecordReviewActivity</string>
+    <string name="show_records">Records</string>
 
 </resources>

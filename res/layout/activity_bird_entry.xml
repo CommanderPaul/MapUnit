@@ -156,12 +156,12 @@
         android:textSize="@dimen/input_font_size" />
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/submit_bird"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/notes_label"
         android:layout_alignParentBottom="true"
-        android:onClick="alert"
-        android:text="ALERT" />
+        android:onClick="submit"
+        android:text="Submit" />
     
 </RelativeLayout>

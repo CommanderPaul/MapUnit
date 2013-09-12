@@ -57,9 +57,13 @@
             android:name="com.input.BirdEntryActivity"
             android:label="@string/title_activity_bird_entry"
             android:screenOrientation="portrait" >
-
             <!-- set screenOrientation to Landscape to prevent refreshing on rotate -->
+            
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.birdapp.CameraActivity"
@@ -68,12 +72,6 @@
         <activity
             android:name="com.birdapp.RecordReviewActivity"
             android:label="@string/title_activity_record_review" >
-                        <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            
         </activity>
     </application>
 

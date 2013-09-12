@@ -1,14 +1,8 @@
 package com.input;
 
 import java.util.Date;
-import java.util.List;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.ActivityManager.RunningTaskInfo;
-import android.app.AlertDialog;
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
@@ -20,20 +14,36 @@ import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.birdapp.CameraActivity;
+import com.birdapp.RecordReviewActivity;
+import com.birdapp.database.GeneralDatabase;
+import com.birdapp.database.ObservationRecord;
 import com.birdapp.gps.utilities.GPSReader;
 import com.mapunit.Constants;
 import com.mapunit.MainActivity;
 import com.mapunit.R;
-//import com.mapunit.R.layout;
-//import com.mapunit.R.menu;
+
+
 
 public class BirdEntryActivity extends Activity implements Constants{
 
 	// Fields
 	
+	private Long dateValue;
+	private TextView dateField;
+	
+	private String nameValue;// actual string
+	private EditText nameField;// object holding the string
+	
+	private String activityValue;
+	private EditText activityField;
+
+	private String notesValue;
+	private EditText notesField;
+	
+	private GeneralDatabase db;
+
 	private Double latValue;
 	private TextView latField;
 	
@@ -41,6 +51,11 @@ public class BirdEntryActivity extends Activity implements Constants{
 	private TextView lonField;
 	
 	private GPSReader gpsReader;
+	
+	// default constructor
+	public BirdEntryActivity(){
+		this.db = new GeneralDatabase(this);
+	}
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +73,11 @@ public class BirdEntryActivity extends Activity implements Constants{
 		
 		
 		// input validation for bird name
-		EditText birdName = (EditText)findViewById(R.id.editTextBirdName);
-		setListenerToEditText(birdName);
+		nameField = (EditText)findViewById(R.id.editTextBirdName);
+		setListenerToEditText(nameField);
 		// input validation for bird activity
-		EditText birdActivity = (EditText)findViewById(R.id.editTextBirdActivity);
-		setListenerToEditText(birdActivity);
+		activityField = (EditText)findViewById(R.id.editTextBirdActivity);
+		setListenerToEditText(activityField);
 		
 		// set initial gps coordiates
 		latField = (TextView) findViewById(R.id.TextViewLatitude);// this may need to go in onCreate()
@@ -86,49 +101,43 @@ public class BirdEntryActivity extends Activity implements Constants{
 		populateLatAndLong();
 	}
 	
-	
-	/**
-	 * @param view
-	 */
-	public void alert(View view){//TODO remove this, function has been moved to GPSReader
+	public void submit(View view){
 		
-		AlertDialog ad = new AlertDialog.Builder(this).create();
+//		dateValue = Long.parseLong(dateField.getText().toString());//TODO need work, need to convert date to long
+		nameValue = nameField.getText().toString();
+		activityValue = activityField.getText().toString();
+//		latValue = Double.parseDouble(latField.getText().toString());
+//		lonValue = Double.parseDouble(lonField.getText().toString());
+//		notesValue = notesField.getText().toString();
+		
+		
+		
+		ObservationRecord record = new ObservationRecord();
+//		record.setDate(dateValue);
+		record.setName(nameValue);
+		record.setActivity(activityValue);
+//		record.setLatitude(latValue);
+//		record.setLongitude(lonValue);
+//		record.setNotes(notesValue);
+		
+		Log.w("xxx", "xxx  " + nameValue + "   " + activityValue);
+		
+		
+		db.addObservationRecord(record);
+//		
+//		
+//		Context context = getApplicationContext();
+//		CharSequence text = "Bird Report Saved!";
+//		int duration = Toast.LENGTH_SHORT;
+//
+//		Toast toast = Toast.makeText(context, text, duration);
+//		toast.show();
 
-		ad.setTitle("GPS Inactive!");
-		ad.setMessage("Do you want to activate the GPS?");
+		// kill view and go to main menu
+		//finish();
 		
-		// Setting Icon to Dialog
-        ad.setIcon(android.R.drawable.stat_sys_warning);
-		
-		// negative button shows up first
-		// set no button
-		ad.setButton(DialogInterface.BUTTON_NEGATIVE, "Don't Activate GPS", 
-				
-			new DialogInterface.OnClickListener() {
-				
-				@Override
-				public void onClick(DialogInterface dialog, int which) {
-					
-					Toast.makeText(getApplicationContext(), "GPS will not be used.", Toast.LENGTH_SHORT).show();
-					dialog.cancel();
-				}}
-			);
-		
-		// set yes button
-		ad.setButton(DialogInterface.BUTTON_POSITIVE, "Activate GPS", 
-				
-			new DialogInterface.OnClickListener() {
-		
-				@Override
-	            public void onClick(DialogInterface dialog, int which) {
-					
-					gpsReader.checkToSeeIfGPSIsOn();
-					
-	            }}
-			);
-		
-		ad.show();
 	}
+	
 	
 	/**
 	 * Uses GPSReader class to get lat and lon from gps
@@ -202,6 +211,12 @@ public class BirdEntryActivity extends Activity implements Constants{
 		// Show Camera ------------------------------------
 				if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.show_camera))){
 					Intent intent = new Intent(this, CameraActivity.class);
+					startActivity(intent);
+				}
+				
+		// Show Records ------------------------------------
+				if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.show_records))){
+					Intent intent = new Intent(this, RecordReviewActivity.class);
 					startActivity(intent);
 				}
 		

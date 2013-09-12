@@ -133,7 +133,5 @@ public class BirdRecordsAdapter extends BaseAdapter{
 		
 		return convertView;
 	}
-	
-
 
 }

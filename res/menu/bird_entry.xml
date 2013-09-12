@@ -11,6 +11,11 @@
         android:showAsAction="ifRoom"
         android:title="@string/show_map"/>
     <item
+        android:id="@+id/show_records"
+        android:orderInCategory="40"
+        android:showAsAction="ifRoom"
+        android:title="@string/show_records"/>
+    <item
         android:id="@+id/show_camera"
         android:orderInCategory="50"
         android:showAsAction="ifRoom"
