@@ -1,0 +1,167 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BirdEntryActivity" >
+
+   
+<!-- may need to set the ems or font for fields -->
+<!-- Today's Date -->
+    <TextView
+        android:id="@+id/observation_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="26dp"
+        android:paddingRight="@dimen/individual_right_padding"
+        android:text="@string/placeholder"
+        android:textSize="@dimen/display_font_size"
+        />
+
+      <TextView
+        android:id="@+id/textViewTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/observation_time"
+        android:text="@string/todays_date"
+        android:layout_alignBaseline="@+id/observation_time"
+        android:layout_toLeftOf="@+id/observation_time"
+        android:paddingRight="@dimen/individual_right_padding"
+        android:textSize="@dimen/display_font_size"
+         />
+            
+<!--  Bird Name -->     
+    <TextView
+        android:id="@+id/bird_name_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/observation_time"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/bird_name_label"
+        android:textSize="@dimen/display_font_size"
+        />
+
+    <EditText
+        android:id="@+id/editTextBirdName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/input_font_size"
+        android:hint="@string/bird_name_hint"
+        android:textColorHint="@color/hint_color"
+        android:layout_alignLeft="@+id/bird_name_label"
+        android:layout_below="@+id/bird_name_label"
+        >
+
+        <requestFocus />
+    </EditText>
+
+<!--  Bird Activity -->     
+    <TextView
+        android:id="@+id/bird_activity_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextBirdName"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/bird_activity_label"
+        android:textSize="@dimen/display_font_size"
+        />
+
+    <EditText
+        android:id="@+id/editTextBirdActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/input_font_size"
+        android:hint="@string/bird_acitivity_hint"
+        android:textColorHint="@color/hint_color"
+        android:layout_alignLeft="@+id/bird_name_label"
+        android:layout_below="@+id/bird_activity_label"
+        >
+
+    </EditText>
+    
+    <!--  Latitude -->     
+    <TextView
+        android:id="@+id/latitude_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/editTextBirdActivity"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="28dp"
+        android:text="@string/latitude_label"
+        android:textSize="@dimen/display_font_size"
+        />
+
+    <TextView
+        android:id="@+id/TextViewLatitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/latitude_label"
+        android:layout_alignBottom="@+id/latitude_label"
+        android:layout_toRightOf="@+id/bird_name_label"
+        android:text="@string/service_not_available"
+        android:textSize="@dimen/display_font_size" 
+        
+        />
+
+    <!--  Longitude -->     
+    <TextView
+        android:id="@+id/longitude_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/latitude_label"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/longitude_label"
+        android:textSize="@dimen/display_font_size"
+        />
+
+    <TextView
+        android:id="@+id/TextViewLongitude"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/longitude_label"
+        android:layout_alignBottom="@+id/longitude_label"
+        android:layout_toRightOf="@+id/bird_name_label"
+        android:text="@string/service_not_available"
+        android:textSize="@dimen/display_font_size" 
+        
+        />
+
+    <!--  Notes -->
+    <TextView
+        android:id="@+id/notes_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/longitude_label"
+        android:layout_below="@+id/longitude_label"
+        android:layout_marginTop="30dp"
+        android:text="@string/bird_notes_label" />
+
+    <EditText
+        android:id="@+id/editTextNotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/notes_label"
+        android:layout_marginTop="8dp"
+        android:hint="@string/bird_notes_hint"
+        android:inputType="textMultiLine"
+        android:textColorHint="@color/hint_color"
+        android:textSize="@dimen/input_font_size" />
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/notes_label"
+        android:layout_alignParentBottom="true"
+        android:onClick="alert"
+        android:text="ALERT" />
+    
+</RelativeLayout>

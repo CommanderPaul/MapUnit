@@ -30,6 +30,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends Activity {
 	
+	private static boolean isRunning;
+	
 	private FakeMarkerOptionsGenerator fakker;
 	private List<Circle> circles = new ArrayList<Circle>();
 	private Marker centerOfMassMarker;
@@ -50,6 +52,8 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		isRunning = true;
 		
 		map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map)).getMap(); //initializes map
 		
@@ -81,6 +85,17 @@ public class MainActivity extends Activity {
 		// Location.distanceBetween(startLatitude, startLongitude,
 		// endLatitude, endLongitude, results);
 		
+	}
+	
+	// keep track of whether an activity is active or not
+	@Override
+	public void onDestroy(){
+		super.onDestroy();
+		isRunning = false;
+	}
+	
+	public static boolean isRunning(){
+		return isRunning;
 	}
 	
 	/**
@@ -187,6 +202,11 @@ public class MainActivity extends Activity {
 		// Under Development ----------------------------------------//TODO remove when no longer neaded
 		if (item.getTitle().toString().equalsIgnoreCase("under_development")){
 			showClosestPoint();
+		}
+		
+		// Back to previous activity ----------------------------------
+		if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.show_form))){
+			finish();
 		}
 		
 		// Map Settings ---------------------------------------

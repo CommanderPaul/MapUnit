@@ -5,7 +5,7 @@
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
 
-    <!-- menu strings -->
+    <!-- Map menu strings -->
     <string name="center_of_mass">Center Of Mass</string>
     <string name="functions">Functions</string>
     <string name="map_type">Map Types</string>
@@ -14,13 +14,13 @@
     <string name="terrain">Terrain</string>
     <string name="satellite">Satellite</string>
     <string name="show_circles">Show Circles</string>
+    <string name="show_form">Show Form</string>
 
     <!-- Settings Sub Menu -->
     <string name="my_location">My Location Button</string>
     <string name="title_activity_map_settings">MapSettingsActivity</string>
     <string name="map_settings">Map Settings</string>
 
-    
     <!-- Map Settings Layout -->
     <string name="map_settings_title">Map Settings</string>
     <string name="tilt_setting">Tilt Setting</string>
@@ -30,5 +30,26 @@
     <string name="save_changes">Save Changes</string>
     <string name="map_type">Map Type</string>
     <string name="type_default">Map Type Default</string>
+    <string name="title_activity_bird_entry">BirdEntryActivity</string>
+	
+    
+        <!-- Bird Entry Page -->
+    <string name="todays_date">Today\'s Date:</string>
+    <string name="bird_name_label">Bird Name:</string>
+    <string name="bird_name_hint">(Enter Bird Name)</string>
+    <string name="bird_activity_label">Bird Activity:</string>
+    <string name="bird_acitivity_hint">(Enter Bird Activity)</string>
+    <string name="latitude_label">Latitude:</string>
+    <string name="longitude_label">Longitude:</string>
+    <string name="service_not_available">Service Not Available</string>
+    <string name="bird_notes_label">Notes:</string>
+    <string name="bird_notes_hint">(Place Notes Here)</string>
+    <string name="app_name">MapUnit</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="placeholder">placeholder</string>
+    
+    <!--  Bird Entry Menu -->
+    <string name="show_map">Show Map</string>
     
 </resources>

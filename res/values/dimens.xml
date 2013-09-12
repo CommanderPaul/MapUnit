@@ -7,4 +7,10 @@
     
     <dimen name="map_preferences_text_size">22dp</dimen>
 
+        <!-- Bird Entry Page -->
+    <dimen name="individual_right_padding">10dp</dimen>
+    <dimen name="input_font_size">26sp</dimen>
+    <dimen name="display_font_size">10sp</dimen>
+    
+    
 </resources>

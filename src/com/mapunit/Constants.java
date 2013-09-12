@@ -23,4 +23,12 @@ public interface Constants {
 	float NORTH = 0;
 	float STANDARD_ZOOM = 15f;
 	
+	String REGULAR_EXPRESSION_ONLY_LETTERS = "[a-zA-Z]*";
+	
+	// Bird Entry Activity Constants --------------------
+	String NON_LETTER_DETECTED = "Non-Letter Detected!";
+	String BIRD_ACTIVITY_REQUIRED = "Bird Activity is Required!";
+	
+	
+	
 }
