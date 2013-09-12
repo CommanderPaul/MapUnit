@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.birdapp.CameraActivity;
 import com.birdapp.gps.utilities.GPSReader;
 import com.mapunit.Constants;
 import com.mapunit.MainActivity;
@@ -196,6 +197,11 @@ public class BirdEntryActivity extends Activity implements Constants{
 				if (item.getTitle().toString().equalsIgnoreCase( getString(R.string.show_map))
 						&& (!MainActivity.isRunning()) ){// will not fire if MainActivity is still active
 					Intent intent = new Intent(this, MainActivity.class);
+					startActivity(intent);
+				}
+		// Show Camera ------------------------------------
+				if (item.getTitle().toString().equalsIgnoreCase(getString(R.string.show_camera))){
+					Intent intent = new Intent(this, CameraActivity.class);
 					startActivity(intent);
 				}
 		

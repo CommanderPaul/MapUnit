@@ -336,55 +336,66 @@ containing a value of this type.
     public static final class id {
         public static final int TextViewLatitude=0x7f05000c;
         public static final int TextViewLongitude=0x7f05000e;
-        public static final int action_settings=0x7f050020;
+        public static final int action_settings=0x7f050026;
         public static final int bird_activity_label=0x7f050009;
         public static final int bird_name_label=0x7f050007;
         public static final int button1=0x7f050011;
-        public static final int center_of_mass=0x7f050021;
+        public static final int button_capture=0x7f050013;
+        public static final int button_capture2=0x7f050020;
+        public static final int camera_preview=0x7f050012;
+        public static final int camera_preview2=0x7f05001f;
+        public static final int center_of_mass=0x7f050027;
         public static final int editTextBirdActivity=0x7f05000a;
         public static final int editTextBirdName=0x7f050008;
         public static final int editTextNotes=0x7f050010;
-        public static final int first_bird=0x7f05001f;
-        public static final int functions=0x7f050023;
+        public static final int first_bird=0x7f050024;
+        public static final int functions=0x7f05002a;
         public static final int hybrid=0x7f050004;
         public static final int latitude_label=0x7f05000b;
         public static final int longitude_label=0x7f05000d;
-        public static final int map=0x7f050012;
-        public static final int map_tilt=0x7f050014;
-        public static final int map_type=0x7f05001a;
-        public static final int map_type_setting_text=0x7f05001b;
-        public static final int map_type_spinner=0x7f05001c;
-        public static final int map_zoom=0x7f050017;
-        public static final int more=0x7f050027;
-        public static final int my_location=0x7f050026;
+        public static final int map=0x7f050014;
+        public static final int map_tilt=0x7f050016;
+        public static final int map_type=0x7f05001c;
+        public static final int map_type_setting_text=0x7f05001d;
+        public static final int map_type_spinner=0x7f05001e;
+        public static final int map_zoom=0x7f050019;
+        public static final int more=0x7f05002e;
+        public static final int my_location=0x7f05002d;
         public static final int none=0x7f050000;
         public static final int normal=0x7f050001;
         public static final int notes_label=0x7f05000f;
         public static final int observation_time=0x7f050005;
         public static final int satellite=0x7f050002;
-        public static final int show_circles=0x7f050024;
-        public static final int show_form=0x7f050022;
+        public static final int show_camera=0x7f050028;
+        public static final int show_circles=0x7f05002b;
+        public static final int show_form=0x7f050029;
+        public static final int surfaceView1=0x7f050021;
         public static final int terrain=0x7f050003;
+        public static final int test_textview=0x7f050025;
         public static final int textViewTime=0x7f050006;
-        public static final int tilt_setting=0x7f050016;
-        public static final int tilt_setting_text=0x7f050015;
-        public static final int title=0x7f050013;
-        public static final int under_development=0x7f050025;
-        public static final int window_lat=0x7f05001d;
-        public static final int window_lon=0x7f05001e;
-        public static final int zoom_setting=0x7f050019;
-        public static final int zoom_setting_text=0x7f050018;
+        public static final int tilt_setting=0x7f050018;
+        public static final int tilt_setting_text=0x7f050017;
+        public static final int title=0x7f050015;
+        public static final int under_development=0x7f05002c;
+        public static final int window_lat=0x7f050022;
+        public static final int window_lon=0x7f050023;
+        public static final int zoom_setting=0x7f05001b;
+        public static final int zoom_setting_text=0x7f05001a;
     }
     public static final class layout {
         public static final int activity_bird_entry=0x7f030000;
-        public static final int activity_main=0x7f030001;
-        public static final int activity_map_settings=0x7f030002;
-        public static final int info_window=0x7f030003;
+        public static final int activity_camera=0x7f030001;
+        public static final int activity_main=0x7f030002;
+        public static final int activity_map_settings=0x7f030003;
+        public static final int camera_surface_dialog_fragment=0x7f030004;
+        public static final int info_window=0x7f030005;
+        public static final int test_textview=0x7f030006;
     }
     public static final class menu {
         public static final int bird_entry=0x7f090000;
-        public static final int main=0x7f090001;
-        public static final int map_settings=0x7f090002;
+        public static final int camera=0x7f090001;
+        public static final int main=0x7f090002;
+        public static final int map_settings=0x7f090003;
     }
     public static final class string {
         public static final int action_settings=0x7f060016;
@@ -494,15 +505,17 @@ containing a value of this type.
         public static final int satellite=0x7f06001e;
         public static final int save_changes=0x7f060029;
         public static final int service_not_available=0x7f060033;
+        public static final int show_camera=0x7f060038;
         public static final int show_circles=0x7f06001f;
         public static final int show_form=0x7f060020;
-        /**   Bird Entry Menu 
+        /**  Bird Entry Menu 
          */
         public static final int show_map=0x7f060037;
         public static final int terrain=0x7f06001d;
         public static final int tilt_default=0x7f060026;
         public static final int tilt_setting=0x7f060025;
         public static final int title_activity_bird_entry=0x7f06002b;
+        public static final int title_activity_camera=0x7f060039;
         public static final int title_activity_map_settings=0x7f060022;
         /**  Bird Entry Page 
          */
