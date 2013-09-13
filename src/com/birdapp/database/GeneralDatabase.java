@@ -136,7 +136,11 @@ public class GeneralDatabase extends SQLiteOpenHelper{
 	 * This method instantiates a database and later closes the database.
 	 * @param birdRecord
 	 */
-	public void addObservationRecord(ObservationRecord birdRecord){
+	public boolean addObservationRecord(ObservationRecord birdRecord){
+		
+		boolean returnValue = false;
+		long returnID = -1;
+		
 		SQLiteDatabase db = this.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
@@ -148,9 +152,16 @@ public class GeneralDatabase extends SQLiteOpenHelper{
 		values.put(COLUMN_NAME_NOTES,  birdRecord.getNotes());
 		
 		// inserting row
-		db.insert(TABLE_BIRD_OBSERVATIONS, null, values);
+		returnID = db.insert(TABLE_BIRD_OBSERVATIONS, null, values); // returns -1 on error, otherwise, id of column is returned
+		
+		//TODO put close in a finally of a try-catch
 		db.close();	//	 always have to close connection!!!
 		
+		if (returnID > 0){
+			returnValue = true;
+		}
+		
+		return returnValue;
 	}
 	
 	/**

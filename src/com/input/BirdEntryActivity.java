@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.View.OnFocusChangeListener;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.birdapp.CameraActivity;
 import com.birdapp.RecordReviewActivity;
@@ -66,23 +67,27 @@ public class BirdEntryActivity extends Activity implements Constants{
 		
 		// get current time
 		Date d = new Date();
-		CharSequence s = DateFormat.format("MM-dd-yyyy", d.getTime());
+		dateValue = d.getTime();
+		CharSequence s = DateFormat.format("MM-dd-yyyy", dateValue);
 		
-		TextView clockView = (TextView) findViewById(R.id.observation_time);
-		clockView.setText(s);
+		dateField = (TextView) findViewById(R.id.observation_time);
+		dateField.setText(s);
 		
-		
-		// input validation for bird name
 		nameField = (EditText)findViewById(R.id.editTextBirdName);
+		// input validation for bird name
 		setListenerToEditText(nameField);
-		// input validation for bird activity
+		
 		activityField = (EditText)findViewById(R.id.editTextBirdActivity);
+		// input validation for bird activity
 		setListenerToEditText(activityField);
 		
 		// set initial gps coordiates
 		latField = (TextView) findViewById(R.id.TextViewLatitude);// this may need to go in onCreate()
 		lonField = (TextView) findViewById(R.id.TextViewLongitude);
 		populateLatAndLong();
+		
+		// get a handle on notes
+		notesField = (EditText)findViewById(R.id.editTextNotes);
 		
 	}
 	
@@ -103,38 +108,32 @@ public class BirdEntryActivity extends Activity implements Constants{
 	
 	public void submit(View view){
 		
-//		dateValue = Long.parseLong(dateField.getText().toString());//TODO need work, need to convert date to long
+		// dateValue does not need to be converted
 		nameValue = nameField.getText().toString();
 		activityValue = activityField.getText().toString();
-//		latValue = Double.parseDouble(latField.getText().toString());
-//		lonValue = Double.parseDouble(lonField.getText().toString());
-//		notesValue = notesField.getText().toString();
-		
-		
-		
+		latValue = Double.parseDouble(latField.getText().toString());
+		lonValue = Double.parseDouble(lonField.getText().toString());
+		notesValue = notesField.getText().toString();
+
 		ObservationRecord record = new ObservationRecord();
-//		record.setDate(dateValue);
+		record.setDate(dateValue);
 		record.setName(nameValue);
 		record.setActivity(activityValue);
-//		record.setLatitude(latValue);
-//		record.setLongitude(lonValue);
-//		record.setNotes(notesValue);
-		
-		Log.w("xxx", "xxx  " + nameValue + "   " + activityValue);
-		
-		
-		db.addObservationRecord(record);
-//		
-//		
-//		Context context = getApplicationContext();
-//		CharSequence text = "Bird Report Saved!";
-//		int duration = Toast.LENGTH_SHORT;
-//
-//		Toast toast = Toast.makeText(context, text, duration);
-//		toast.show();
+		record.setLatitude(latValue);
+		record.setLongitude(lonValue);
+		record.setNotes(notesValue);
 
-		// kill view and go to main menu
-		//finish();
+		if (db.addObservationRecord(record)){
+			Toast.makeText(this, BIRD_REPORT_SAVED, Toast.LENGTH_SHORT).show();
+			
+			// need to clear form after successful save
+			nameField.setText("");
+			activityField.setText("");
+			notesField.setText("");
+			
+		}else{
+			Toast.makeText(this, BIRD_REPORT_SAVE_ERROR, Toast.LENGTH_LONG).show();
+		}
 		
 	}
 	

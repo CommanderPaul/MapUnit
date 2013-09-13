@@ -39,7 +39,6 @@ public class BirdRecordsAdapter extends BaseAdapter{
 		GeneralDatabase db = new GeneralDatabase(context);// context has to be from an activity
 		this.listOfRecords = (ArrayList<ObservationRecord>) db.getAllObservationRecords();
 		
-		//listOfRecords.add(new ObservationRecord("bob","bob", 123.3, 123.3, "notes"));
 		
 		
 	}
@@ -124,6 +123,13 @@ public class BirdRecordsAdapter extends BaseAdapter{
 		
 		TextView birdNameTextView = (TextView) convertView.findViewById(R.id.editTextBirdName);
 		birdNameTextView.setText(observationRecord.getName());
+		
+		
+		// gps coordinates
+		TextView gpsCoordinates = (TextView) convertView.findViewById(R.id.gps_coordinates);
+		String gpsDisplayString = "Lat: " + observationRecord.getLatitude() + "\nLon:" + observationRecord.getLongitude();
+		gpsCoordinates.setText(gpsDisplayString);
+		
 		
 		Button deleteBird = (Button) convertView.findViewById(R.id.buttonDeleteBird);
 		//deleteBird.setText(" " + observationRecord.getId());

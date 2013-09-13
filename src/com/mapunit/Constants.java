@@ -29,6 +29,7 @@ public interface Constants {
 	String NON_LETTER_DETECTED = "Non-Letter Detected!";
 	String BIRD_ACTIVITY_REQUIRED = "Bird Activity is Required!";
 	
-	
+	String BIRD_REPORT_SAVED = "Bird Report Saved!";
+	String BIRD_REPORT_SAVE_ERROR = "Bird Report NOT Saved!";
 	
 }
