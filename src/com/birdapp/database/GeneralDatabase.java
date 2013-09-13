@@ -2,6 +2,9 @@ package com.birdapp.database;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -103,6 +106,16 @@ public class GeneralDatabase extends SQLiteOpenHelper{
 		birdRecordList.add(new ObservationRecord("Pidgeon"));
 		birdRecordList.add(new ObservationRecord("Robin"));
 		
+		// populate the rest of the bird data in the bird object
+		for(ObservationRecord birdRecord : birdRecordList){
+			
+			birdRecord.setLatitude(generatePoints().latitude);
+			birdRecord.setLongitude(generatePoints().longitude);
+			
+		}
+		
+		
+		// write list to database
 		for(ObservationRecord birdRecord : birdRecordList){
 			
 			ContentValues values = new ContentValues();
@@ -117,6 +130,26 @@ public class GeneralDatabase extends SQLiteOpenHelper{
 			db.insert(TABLE_BIRD_OBSERVATIONS, null, values);
 		}
 	}
+	
+	/**
+	 * generate random point near Catalyst
+	 * @return
+	 */
+	private LatLng generatePoints(){
+		LatLng returnPoint = null;
+		
+		Double baseLat = 45.513d;
+		double baseLon = -122.834d;
+		
+		Random random = new Random();
+		Double newLat = ((random.nextFloat() - .5) * .001) + baseLat;
+		double newLon = ((random.nextFloat() - .5) * .001) + baseLon;
+		
+		returnPoint = new LatLng(newLat, newLon);
+
+		return returnPoint;
+	}
+	
 	
 	// upgrading database - required for super
 	@Override

@@ -88,6 +88,9 @@ public class FakeMarkerOptionsGenerator {
 	}
 
 	/**
+	 * Moved to General Database - ok to delete when 
+	 * the rest of object functionality is deprecated
+	 * 
 	 * generate random point near Catalyst
 	 * @return
 	 */

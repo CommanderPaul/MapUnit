@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.birdapp.database.GeneralDatabase;
+import com.birdapp.database.ObservationRecord;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
@@ -75,11 +77,28 @@ public class MainActivity extends Activity {
 		customizeInfoWindowAdapter();// customized marker listener
 		
 		
-		for (MarkerOptions marker : fakker.getMarkerList()) {
-			Marker placedMarker = map.addMarker(marker);
+		// adds fake markers
+		for (MarkerOptions markerOptions : fakker.getMarkerList()) {
+			Marker placedMarker = map.addMarker(markerOptions);
 			placedMarkers.add(placedMarker);
 		}
-
+		
+		// add markers from database
+		GeneralDatabase gd = new GeneralDatabase(this);
+		
+		for (ObservationRecord record : gd.getAllObservationRecords()){
+			
+			// need to convert observation record to either Marker or MarkerOption
+			MarkerOptions marker = new MarkerOptions()
+			.position(new LatLng(record.getLatitude(), record.getLongitude()))					
+			.visible(true)
+			.draggable(true)
+			.title(record.getName())
+			.snippet(record.getActivity()); //text under title
+	// .icon(iconToUse)
+			map.addMarker(marker);
+			
+		}
 		
 		
 		// Location.distanceBetween(startLatitude, startLongitude,
