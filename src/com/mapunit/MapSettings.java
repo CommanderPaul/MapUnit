@@ -47,7 +47,7 @@ public class MapSettings implements Constants {
 	 */
 	public CameraUpdate configureMapView(){
 
-		float tilt = preferences.getFloat(TILT_KEY, 0f);// tilt 0 to 90
+		float tilt = preferences.getFloat(TILT_KEY, 0f);// tilt 0 to 90	//TODO push up magic numbers
 		float zoom = preferences.getFloat(ZOOM_KEY, 17f);// zoom 0 to 20?
 
 		// uses method chaining

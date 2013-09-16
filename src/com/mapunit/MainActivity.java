@@ -21,6 +21,8 @@ import com.birdapp.database.ObservationRecord;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -76,13 +78,6 @@ public class MainActivity extends Activity {
 
 		customizeInfoWindowAdapter();// customized marker listener
 		
-		
-		// adds fake markers
-		for (MarkerOptions markerOptions : fakker.getMarkerList()) {
-			Marker placedMarker = map.addMarker(markerOptions);
-			placedMarkers.add(placedMarker);
-		}
-		
 		// add markers from database
 		GeneralDatabase gd = new GeneralDatabase(this);
 		
@@ -94,8 +89,9 @@ public class MainActivity extends Activity {
 			.visible(true)
 			.draggable(true)
 			.title(record.getName())
-			.snippet(record.getActivity()); //text under title
-	// .icon(iconToUse)
+			.snippet(record.getActivity()) //text under title
+			.icon(matchIcon(record));
+			
 			map.addMarker(marker);
 			
 		}
@@ -105,6 +101,40 @@ public class MainActivity extends Activity {
 		// endLatitude, endLongitude, results);
 		
 	}
+	
+	
+	private BitmapDescriptor matchIcon(ObservationRecord observationRecord){
+		
+		BitmapDescriptor iconToUse = null;
+		
+		if (observationRecord.getName().equalsIgnoreCase("Robin")){
+			iconToUse = BitmapDescriptorFactory.fromResource(R.drawable.red_icon);
+		}
+		else if (observationRecord.getName().equalsIgnoreCase("Pigeon")){
+			iconToUse = BitmapDescriptorFactory.fromResource(R.drawable.grey_icon);
+		}
+		else if (observationRecord.getName().equalsIgnoreCase("Big Bird")){
+			iconToUse = BitmapDescriptorFactory.fromResource(R.drawable.yellow_icon);
+		}
+		else if (observationRecord.getName().equalsIgnoreCase("Chicken")){
+			iconToUse = BitmapDescriptorFactory.fromResource(R.drawable.yellow_icon);
+		}
+		else if (observationRecord.getName().equalsIgnoreCase("Crow")){
+			iconToUse = BitmapDescriptorFactory.fromResource(R.drawable.black_icon);
+		}
+		else if (observationRecord.getName().equalsIgnoreCase("Blue Jay")){
+			iconToUse = BitmapDescriptorFactory.fromResource(R.drawable.blue_icon);
+		}
+		else{
+			iconToUse = BitmapDescriptorFactory.fromResource(android.R.drawable.btn_star_big_on);
+		}
+		
+		
+		return iconToUse;
+	}
+	
+	
+	
 	
 	// keep track of whether an activity is active or not
 	@Override
@@ -181,7 +211,7 @@ public class MainActivity extends Activity {
 			centerOfMassMarker = null;
 		} else {
 			
-			LatLng centerOfMass = pointCalculations.figureCenterOfMass(fakker.getMarkerList());
+			LatLng centerOfMass = pointCalculations.figureCenterOfMass(fakker.getMarkerList());//TODO change to use bounding box
 
 			// TODO find/make a good marker for center of mass
 			// iconToUse =
@@ -284,6 +314,8 @@ public class MainActivity extends Activity {
 						.findViewById(R.id.window_lon));
 				//longitude.setText("Longitude is " + lon);
 				
+				TextView title = ((TextView)view.findViewById(R.id.window_title));
+				title.setText(marker.getTitle());
 				
 				ImageView imageView = ((ImageView)view.findViewById(R.id.first_bird));
 				

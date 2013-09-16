@@ -103,8 +103,12 @@ public class GeneralDatabase extends SQLiteOpenHelper{
 		List <ObservationRecord> birdRecordList = new ArrayList<ObservationRecord>();
 		birdRecordList.add(new ObservationRecord("Chicken"));
 		birdRecordList.add(new ObservationRecord("Big Bird"));
-		birdRecordList.add(new ObservationRecord("Pidgeon"));
+		birdRecordList.add(new ObservationRecord("Pigeon"));
 		birdRecordList.add(new ObservationRecord("Robin"));
+		birdRecordList.add(new ObservationRecord("Crow"));
+		birdRecordList.add(new ObservationRecord("Blue Jay"));
+		birdRecordList.add(new ObservationRecord("Penguin"));
+		
 		
 		// populate the rest of the bird data in the bird object
 		for(ObservationRecord birdRecord : birdRecordList){
@@ -142,8 +146,8 @@ public class GeneralDatabase extends SQLiteOpenHelper{
 		double baseLon = -122.834d;
 		
 		Random random = new Random();
-		Double newLat = ((random.nextFloat() - .5) * .001) + baseLat;
-		double newLon = ((random.nextFloat() - .5) * .001) + baseLon;
+		Double newLat = ((random.nextFloat() - .5) * .002) + baseLat;
+		double newLon = ((random.nextFloat() - .5) * .002) + baseLon;
 		
 		returnPoint = new LatLng(newLat, newLon);
 
